@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ex1">
+        <wb-resource deploy-path="/" source-path="/app-web/src/main/webapp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="target/classes"/>
+        <wb-resource deploy-path="/WEB-INF/flex" source-path="/app-flex-config/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/web" source-path="/app-flex/target/bin-debug"/>
+        <property name="context-root" value="ex1"/>
+        <property name="java-output-path" value="target/classes"/>
+    </wb-module>
+</project-modules>

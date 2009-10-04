@@ -1,0 +1,20 @@
+<project name="ex1">
+
+	<publishDate position="right" format="dd MMM yyyy" />
+
+	<body>
+		<menu name="Main Menu">
+			<item name="Introduction" href="index.html" />
+			<item name="Features" href="features.html" />
+			<item name="Installation" href="installation.html" />
+			<item name="Configuration" href="configuration.html" />
+			<item name="FAQ" href="faq.html" />
+		</menu>
+		<menu name="Developer Reference">
+			<item name="Architecture" href="http://"></item>
+			<item name="Source Code" href="http://"></item>
+			<item name="Bug tracking" href="http://"></item>
+		</menu>
+		${reports}
+	</body>
+</project>
