@@ -1,6 +1,3 @@
-/**
- * Copyright Standard Chartered Bank Singapore.
- */
 package kaizencreek.service;
 
 /**

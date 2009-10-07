@@ -5,7 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="target/classes"/>
         <wb-resource deploy-path="/WEB-INF/flex" source-path="/app-flex-config/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/web" source-path="/app-flex/target/bin-debug"/>
-        <property name="context-root" value="ex1"/>
         <property name="java-output-path" value="target/classes"/>
+        <property name="context-root" value="ex1"/>
     </wb-module>
 </project-modules>

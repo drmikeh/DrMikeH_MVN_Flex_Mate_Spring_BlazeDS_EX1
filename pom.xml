@@ -10,7 +10,7 @@
 	<repositories>
 		<repository>
 			<id>flex-mojos-repository</id>
-			<url>http://svn.sonatype.org/flexmojos/repository</url>
+			<url>http://repository.sonatype.org/content/groups/flexgroup/</url>
 			<releases>
 			</releases>
 			<snapshots>
@@ -42,7 +42,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>flex-mojos-repository</id>
-			<url>http://svn.sonatype.org/flexmojos/repository</url>
+			<url>http://repository.sonatype.org/content/groups/flexgroup/</url>
 			<releases>
 			</releases>
 			<snapshots>

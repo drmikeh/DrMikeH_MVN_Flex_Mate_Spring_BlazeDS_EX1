@@ -1,7 +1,5 @@
 package kaizencreek.service;
 
-import kaizencreek.service.impl.HelloWorldServiceImpl;
-
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 public class HelloWorldServiceTest extends AbstractDependencyInjectionSpringContextTests {
