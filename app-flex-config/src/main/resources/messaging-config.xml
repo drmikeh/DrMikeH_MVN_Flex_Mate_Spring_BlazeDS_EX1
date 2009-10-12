@@ -11,4 +11,6 @@
         <channel ref="my-polling-amf"/>
     </default-channels>
 
+	<destination id="chat"/>
+	
 </service>

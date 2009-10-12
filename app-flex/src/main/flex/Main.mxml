@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute"
+	creationComplete="consumer.subscribe()">
 
-	<mx:Script>
-		<![CDATA[
-			import mx.binding.utils.BindingUtils;
-			import mx.messaging.channels.StreamingAMFChannel;
-			import mx.rpc.events.ResultEvent;
-			import mx.controls.Alert;
-			
-			[Bindable]
-			var greeting : String;
-			
-			private function onResultEvent(event:ResultEvent):void {
-				// Alert.show(event.result as String);
-				greeting = event.result as String;
-			}
-		]]>
-	</mx:Script>
-	
-	<mx:RemoteObject id="helloWorldService" destination="helloWorldService">
+	<mx:RemoteObject id="helloWorldService" destination="helloWorldService2">
 		<mx:method name="say" result="onResultEvent(event)" />
-		
 	</mx:RemoteObject>
+	
+	<mx:Producer id="producer" destination="chat"/>
+	<mx:Consumer id="consumer" destination="chat" message="messageHandler(event)"/>
 		
 	<mx:VBox horizontalCenter="0" verticalCenter="0">
 		<mx:HBox>
@@ -29,6 +16,45 @@
 			<mx:TextInput id="who" /> 
 			<mx:Button click="{helloWorldService.say(who.text)}" label="Say" />
 		</mx:HBox>
+		
 		<mx:Text id="greetingText" text="{greeting}" />
+		
+		<mx:TextArea id="log" width="300" height="300"/>
+		
+		<mx:ControlBar>
+			<mx:TextInput id="msg" width="300" enter="send()"/>
+			<mx:Button label="Send" click="send()"/>
+		</mx:ControlBar>
 	</mx:VBox>
+	
+	<mx:Script>
+        <![CDATA[
+        	import mx.messaging.events.MessageEvent;
+        	import mx.messaging.messages.AsyncMessage;
+            import mx.binding.utils.BindingUtils;
+            import mx.messaging.channels.StreamingAMFChannel;
+            import mx.rpc.events.ResultEvent;
+            import mx.controls.Alert;
+            
+            [Bindable]
+            private var greeting : String;
+            
+            private function onResultEvent(event:ResultEvent):void {
+                // Alert.show(event.result as String);
+                greeting = event.result as String;
+            }
+            
+            private function send():void {
+            	var message:AsyncMessage = new AsyncMessage();
+            	message.body.chatMessage = msg.text;
+            	producer.send(message);
+            	msg.text = "";
+            }
+            
+            private function messageHandler(event:MessageEvent):void {
+            	log.text += event.message.body.chatMessage + "\n";
+            }
+        ]]>
+    </mx:Script>
+
 </mx:Application>

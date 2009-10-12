@@ -4,5 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="helloWorldService" class="kaizencreek.service.impl.HelloWorldServiceImpl" />
+	
+	<bean id="chatRoomService" class="kaizencreek.service.impl.ChatRoomServiceImpl" />
 
 </beans>
