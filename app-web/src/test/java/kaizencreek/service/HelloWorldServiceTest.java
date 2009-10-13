@@ -10,6 +10,7 @@ public class HelloWorldServiceTest extends AbstractDependencyInjectionSpringCont
 		this.helloWorldService = helloWorldService;
 	}
 	
+	@Override
 	protected String[] getConfigLocations() {
 		return new String[] {"applicationContext-resource.xml", "applicationContext-service.xml"};
 	}

@@ -12,9 +12,9 @@ public class SpringFactory implements FlexFactory {
 	 * @see flex.messaging.FlexFactory#createFactoryInstance(java.lang.String, flex.messaging.config.ConfigMap)
 	 */
 	public FactoryInstance createFactoryInstance(String id, ConfigMap properties) {
-		SpringFactoryInstance i = new SpringFactoryInstance(this, id, properties);
-		i.setSource(properties.getPropertyAsString(SOURCE, i.getId()));
-		return i;
+		SpringFactoryInstance sfi = new SpringFactoryInstance(this, id, properties);
+		sfi.setSource(properties.getPropertyAsString(SOURCE, sfi.getId()));
+		return sfi;
 	}
 
 	/**
@@ -22,8 +22,8 @@ public class SpringFactory implements FlexFactory {
 	 * 
 	 * @see flex.messaging.FlexFactory#lookup(flex.messaging.FactoryInstance)
 	 */
-	public Object lookup(FactoryInstance i) {
-		return ((SpringFactoryInstance) i).getSpringBean();
+	public Object lookup(FactoryInstance fi) {
+		return ((SpringFactoryInstance) fi).getSpringBean();
 	}
 
 	/**

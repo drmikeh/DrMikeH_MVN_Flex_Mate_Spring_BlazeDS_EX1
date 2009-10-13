@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
-	layout="absolute"
+	layout="vertical"
+	width="100%" height="100%"
+	horizontalAlign="center" verticalAlign="middle"
+	styleName="mike"
 	creationComplete="consumer.subscribe()">
+	
+	<mx:Style source="/assets/app.css"/>
 
-	<mx:RemoteObject id="helloWorldService" destination="helloWorldService2">
-		<mx:method name="say" result="onResultEvent(event)" />
+	<mx:RemoteObject id="helloWorldService" destination="helloWorldService">
+	   <mx:method name="say" result="onHelloEvent(event)" />
+	</mx:RemoteObject>
+	
+	<mx:RemoteObject id="timeService" destination="timeService">
+	   <mx:method name="getTime" result="onGetTimeEvent(event)" />
 	</mx:RemoteObject>
 	
 	<mx:Producer id="producer" destination="chat"/>
 	<mx:Consumer id="consumer" destination="chat" message="messageHandler(event)"/>
-		
-	<mx:VBox horizontalCenter="0" verticalCenter="0">
-		<mx:HBox>
-			<mx:Label text="Enter your name:" /> 
-			<mx:TextInput id="who" /> 
-			<mx:Button click="{helloWorldService.say(who.text)}" label="Say" />
-		</mx:HBox>
-		
-		<mx:Text id="greetingText" text="{greeting}" />
-		
-		<mx:TextArea id="log" width="300" height="300"/>
-		
-		<mx:ControlBar>
-			<mx:TextInput id="msg" width="300" enter="send()"/>
-			<mx:Button label="Send" click="send()"/>
-		</mx:ControlBar>
-	</mx:VBox>
 	
+	<mx:VBox horizontalAlign="center" verticalAlign="top" width="70%" height="70%">
+		<mx:TabNavigator width="100%" height="100%" >
+		   <mx:VBox label="Hello Service" horizontalAlign="center">
+	           <mx:Label text="Enter your name:" /> 
+			   <mx:TextInput id="who" /> 
+	           <mx:Button label="Say" click="{helloWorldService.say(who.text)}" />
+			   <mx:Text id="greetingText" text="{greeting}" />
+		   </mx:VBox>
+			
+	        <mx:VBox label="Time Service" horizontalAlign="center">
+	            <mx:Button label="Get Server Time" click="{timeService.getTime()}" />
+	            <mx:Text id="serverTimeText" text="{serverTime}" />
+	        </mx:VBox>
+			
+			<mx:VBox label="Chat Service" horizontalAlign="center">
+	    		<mx:TextArea id="log" width="300" height="200"/>
+				
+				<mx:ControlBar>
+					<mx:TextInput id="msg" width="300" enter="send()"/>
+					<mx:Button label="Send" click="send()"/>
+				</mx:ControlBar>
+			</mx:VBox>
+		</mx:TabNavigator>
+    </mx:VBox>
+        
 	<mx:Script>
         <![CDATA[
         	import mx.messaging.events.MessageEvent;
@@ -39,9 +56,15 @@
             [Bindable]
             private var greeting : String;
             
-            private function onResultEvent(event:ResultEvent):void {
-                // Alert.show(event.result as String);
+            [Bindable]
+            private var serverTime : Date;
+            
+            private function onHelloEvent(event:ResultEvent):void {
                 greeting = event.result as String;
+            }
+            
+            private function onGetTimeEvent(event:ResultEvent):void {
+            	serverTime = event.result as Date;
             }
             
             private function send():void {

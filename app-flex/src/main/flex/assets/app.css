@@ -1,0 +1,22 @@
+/* CSS file */
+
+Application {
+/*  backgroundColor: #222266; */
+    backgroundColor: #222266;
+    backgroundGradientColors: #6666AA, #222244;
+}
+
+TabNavigator {
+    backgroundColor: #AAAAFF;
+}
+
+.mike
+{
+    backgroundColor: #222266;
+    backgroundImage: "";
+    horizontalAlign: "left";
+    paddingBottom: 0;
+    paddingLeft: 0;
+    paddingRight: 0;
+    paddingTop: 0;
+}

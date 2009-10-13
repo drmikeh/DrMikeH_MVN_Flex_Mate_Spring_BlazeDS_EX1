@@ -5,20 +5,29 @@
         <adapter-definition id="java-object" class="flex.messaging.services.remoting.adapters.JavaAdapter" default="true"/>
     </adapters>
     
-    <destination id="helloWorldService2">
+    <destination id="helloWorldService">
     	<properties>
     		<factory>spring</factory>
     		<source>helloWorldService</source>
     	</properties>
     </destination>
     
+    <destination id="timeService">
+    	<properties>
+    		<factory>spring</factory>
+    		<source>timeService</source>
+    	</properties>
+    </destination>
+
+    <!-- 
     <destination id="chatRoomService">
         <properties>
             <factory>spring</factory>
             <source>chatRoomService</source>
         </properties>
     </destination>
-	
+	 -->
+	 
     <default-channels>
         <channel ref="my-amf"/>
     </default-channels>

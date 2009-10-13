@@ -9,6 +9,7 @@
   </compiler>
   <applications>
     <application path="Main.mxml"/>
+    <application path="flex/Main.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
