@@ -16,8 +16,6 @@ public class TimeServiceImpl implements TimeService {
 	/* (non-Javadoc)
 	 * @see kaizencreek.service.TimeService#getTime()
 	 */
-	
-	@Override
 	public Date getTime() {
 		return new Date();
 	}

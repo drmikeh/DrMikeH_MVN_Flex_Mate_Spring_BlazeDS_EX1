@@ -29,12 +29,10 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		rooms = Collections.synchronizedSet(new HashSet<String>());
 	}
 
-	@Override
 	public Set<String> getRooms() {
 		return rooms;
 	}
 	
-	@Override
 	public void createRoom(String id) {
 
 		if (rooms.contains(id)) {
