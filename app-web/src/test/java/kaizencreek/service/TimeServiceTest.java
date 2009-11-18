@@ -16,6 +16,7 @@ public class TimeServiceTest extends AbstractDependencyInjectionSpringContextTes
 	public void setHelloWorldService(TimeService timeService) {
 		this.timeService = timeService;
 	}
+	
 	@Override
 	protected String[] getConfigLocations() {
 		return new String[] {"applicationContext-resource.xml", "applicationContext-service.xml"};

@@ -18,15 +18,14 @@
     		<source>timeService</source>
     	</properties>
     </destination>
-
-    <!-- 
-    <destination id="chatRoomService">
-        <properties>
-            <factory>spring</factory>
-            <source>chatRoomService</source>
-        </properties>
+    
+        <destination id="randomNumberService">
+    	<properties>
+    		<factory>spring</factory>
+    		<source>randomNumberService</source>
+    	</properties>
     </destination>
-	 -->
+    
 	 
     <default-channels>
         <channel ref="my-amf"/>
