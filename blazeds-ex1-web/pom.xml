@@ -55,6 +55,22 @@
 							<excludeTypes>jar,swf</excludeTypes>
 						</configuration>
 					</execution>
+					
+					<execution>
+                        <id>unpack-flex</id>
+                    	<goals>
+                    	    <goal>unpack-dependencies</goal>
+                    	</goals>
+                    	<phase>generate-resources</phase>
+                    	<configuration>
+                    	    <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                    	    <includeArtifacIds>ex1-flex</includeArtifacIds>
+                    	    <includeGroupIds>${project.groupId}</includeGroupIds>
+                    	    <includeClassifiers>html-bundle</includeClassifiers>
+                    	    <excludeTransitive>true</excludeTransitive>
+                    	    <excludeTypes>jar,swf</excludeTypes>
+                    	</configuration>
+                    </execution>				
 				</executions>
 			</plugin>
 			
