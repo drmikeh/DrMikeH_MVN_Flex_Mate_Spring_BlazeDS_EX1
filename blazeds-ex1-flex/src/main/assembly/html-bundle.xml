@@ -10,7 +10,7 @@
 			<outputDirectory></outputDirectory>
 			<includes>
 				<include>*.js</include>
-				<include>*.swf</include>
+				<include>playerProductInstall.swf</include>
 				<include>*.html</include>
 			</includes>
 		</fileSet>

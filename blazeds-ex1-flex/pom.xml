@@ -39,13 +39,19 @@
                 <extensions>true</extensions>
                 <configuration>
                     <contextRoot>blazeds-ex1-web</contextRoot>
-                    <!--
-                    <targetPlayer>10.0.0</targetPlayer>
-                    -->
+                    <templateURI>folder:${basedir}/html-template</templateURI>
+                    <!-- targetPlayer>10.0.0</targetPlayer -->
                     <locales>
                         <locale>en_US</locale>
                     </locales>
                 </configuration>
+                <executions>
+    				<execution>
+    					<goals>
+    						<goal>wrapper</goal>
+    					</goals>
+    				</execution>
+    			</executions>
                 <dependencies>
                     <dependency>
                         <groupId>com.adobe.flex</groupId>
@@ -55,7 +61,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-			
+            
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -71,6 +77,27 @@
 							<includeArtifacIds>blazeds-ex1-flex-config</includeArtifacIds>
 							<includeGroupIds>${project.groupId}</includeGroupIds>
 							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>html-bundle</id>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<descriptors>
+								<descriptor>
+									src/main/assembly/html-bundle.xml
+								</descriptor>
+							</descriptors>
 						</configuration>
 					</execution>
 				</executions>
