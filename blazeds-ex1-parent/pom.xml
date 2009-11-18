@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>kaizencreek</groupId>
-	<artifactId>ex1</artifactId>
+	
+	<groupId>com.kaizencreek.blazeds-ex1</groupId>
+	<artifactId>blazeds-ex1-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>[ex1] Application</name>
-	<description>Some description for the project</description>
+	<name>[blazeds-ex1] Application</name>
+	<description>Example of Flex / Spring / BlazeDS application</description>
+	
+	<properties>
+		<flex.sdk.version>3.1.0.2710</flex.sdk.version>
+		<flexmojos.version>3.3.0</flexmojos.version>
+	</properties>
+	
 	<repositories>
 		<repository>
 			<id>flex-mojos-repository</id>
@@ -28,6 +35,7 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+                <!--
 		<repository>
 			<id>maven-blazeds-spring-archetype</id>
 			<url>http://maven-blazeds-spring-archetype.googlecode.com/svn/maven2/</url>
@@ -38,6 +46,7 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+                -->
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -97,8 +106,8 @@
 	    </plugins>
 	</reporting>
   <modules>
-    <module>app-flex</module>
-    <module>app-web</module>
-    <module>app-flex-config</module>
+    <module>../blazeds-ex1-flex</module>
+    <module>../blazeds-ex1-web</module>
+    <module>../blazeds-ex1-flex-config</module>
   </modules>
 </project>
