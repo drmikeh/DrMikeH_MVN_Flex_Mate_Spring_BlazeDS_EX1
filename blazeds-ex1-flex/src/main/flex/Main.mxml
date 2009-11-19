@@ -6,7 +6,7 @@
 	styleName="mike"
 	creationComplete="consumer.subscribe()">
 	
-	<mx:Style source="/assets/app.css"/>
+	<mx:Style source="/assets/styles/app.css"/>
 
 	<mx:RemoteObject id="helloWorldService" destination="helloWorldService">
 	   <mx:method name="say" result="onHelloEvent(event)" />
