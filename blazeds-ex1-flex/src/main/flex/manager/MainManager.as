@@ -13,6 +13,9 @@ package manager
         [Bindable]
         public var randomNumbers:ArrayCollection = new ArrayCollection();
         
+        [Bindable]
+        public var chatMessage:String = "";
+        
         // --------------------------------------------
         public function setServerTime(tm:Date):void {
             trace("setServerTime: " + tm);
@@ -45,5 +48,16 @@ package manager
         public function onFaultRandomNumbers(obj:Object):void {
             trace("onFaultRandomNumbers: " + obj);
         }
+        
+        // --------------------------------------------
+        public function handleChatMessage(obj:Object):void {
+            trace("handleChatMessage: " + obj);
+        }
+        
+        // --------------------------------------------
+        public function onFaultChatMessage(obj:Object):void {
+            trace("onFaultChatMessage: " + obj);
+        }
+        
     }
 }

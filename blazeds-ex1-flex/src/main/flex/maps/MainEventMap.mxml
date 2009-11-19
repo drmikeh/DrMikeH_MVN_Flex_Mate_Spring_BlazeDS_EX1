@@ -63,11 +63,30 @@
             </resultHandlers>
             <faultHandlers>
                 <MethodInvoker generator="{MainManager}"
-                        method="onFaultRandomNumbers"
-                        arguments="{resultObject}" />
+                               method="onFaultRandomNumbers"
+                               arguments="{resultObject}" />
             </faultHandlers>
         </RemoteObjectInvoker>
     </EventHandlers>
+    
+    <MessageHandlers destination="chat" debug="true">
+        <MethodInvoker generator="{MainManager}" 
+                       method="handleChatMessage"
+                       arguments="{message}" />
+                       
+        <EventAnnouncer generator="{SimpleEvent}"
+                        type="{SimpleEvent.CHAT_MESSAGE_RECEIVED}">
+            <Properties chatMessage="{message.body.chatMessage }" />
+        </EventAnnouncer>
+
+        <faultHandlers>
+            <MethodInvoker generator="{MainManager}" 
+                           method="onFaultChatMessage"
+                           arguments="{message}"/>
+        </faultHandlers>
+
+    </MessageHandlers>
+    
     
     <!-- Injectors __________________________________________________________________ -->
     
@@ -75,6 +94,7 @@
         <PropertyInjector targetKey="serverTime" source="{MainManager}" sourceKey="serverTime" />
         <PropertyInjector targetKey="greeting" source="{MainManager}" sourceKey="greeting" />
         <PropertyInjector targetKey="randomNumbers" source="{MainManager}" sourceKey="randomNumbers" />
+        <ListenerInjector eventType="{SimpleEvent.CHAT_MESSAGE_RECEIVED}" method="chatMessageHandler" />
     </Injectors>
     
 </EventMap>
