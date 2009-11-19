@@ -108,6 +108,6 @@
   <modules>
     <module>../blazeds-ex1-flex</module>
     <module>../blazeds-ex1-web</module>
-    <module>../blazeds-ex1-flex-config</module>
+    <module>../blazeds-ex1-remoting-config</module>
   </modules>
 </project>

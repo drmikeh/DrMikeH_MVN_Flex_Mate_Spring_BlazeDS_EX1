@@ -11,7 +11,7 @@
 	</parent>
 	
 	<groupId>com.kaizencreek.blazeds-ex1</groupId>
-	<artifactId>blazeds-ex1-flex-config</artifactId>
+	<artifactId>blazeds-ex1-remoting-config</artifactId>
 	<name>[blazeds-ex1] Flex remoting service config</name>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>

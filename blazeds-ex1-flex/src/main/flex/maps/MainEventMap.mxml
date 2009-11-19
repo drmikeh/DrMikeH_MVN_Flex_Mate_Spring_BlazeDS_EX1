@@ -4,6 +4,8 @@
     xmlns="http://mate.asfusion.com/"
     >
     
+    <mx:Producer id="chatProducer" destination="chat" />
+    
     <mx:Script>
         <![CDATA[
             import mx.messaging.Producer;
@@ -15,12 +17,12 @@
             import mx.messaging.events.MessageFaultEvent;
             import mx.messaging.messages.AsyncMessage;
             
-            private var chatProducer:Producer;
+            // private var chatProducer:Producer;
             
             private function onCreationComplete():void {
                 trace('MainEventMap.onCreationComplete');
-                chatProducer = new Producer();
-                chatProducer.destination = "chat";
+                // chatProducer = new Producer();
+                // chatProducer.destination = "chat";
                 chatProducer.addEventListener(MessageFaultEvent.FAULT, onFaultSendChatMessage);
             }
             

@@ -17,7 +17,7 @@
 	
 	<properties>
 		<blazeds-ex1-flex.version>1.0-SNAPSHOT</blazeds-ex1-flex.version>
-		<blazeds-ex1-flex-config.version>1.0-SNAPSHOT</blazeds-ex1-flex-config.version>
+		<blazeds-ex1-remoting-config.version>1.0-SNAPSHOT</blazeds-ex1-remoting-config.version>
 		<backport-util-concurrent.version>3.1</backport-util-concurrent.version>
 		<blazeds.version>3.0.0.544</blazeds.version>
 		<junit.version>4.0</junit.version>
@@ -43,7 +43,7 @@
 								${project.build.directory}/${project.build.finalName}/WEB-INF/flex
 							</outputDirectory>
 							<includeArtifacIds>
-								blazeds-ex1-flex-config
+								blazeds-ex1-remoting-config
 							</includeArtifacIds>
 							<includeGroupIds>
 								${project.groupId}
@@ -148,8 +148,8 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>blazeds-ex1-flex-config</artifactId>
-			<version>${blazeds-ex1-flex-config.version}</version>
+			<artifactId>blazeds-ex1-remoting-config</artifactId>
+			<version>${blazeds-ex1-remoting-config.version}</version>
 			<classifier>resources</classifier>
 			<type>zip</type>
 			<scope>provided</scope>
