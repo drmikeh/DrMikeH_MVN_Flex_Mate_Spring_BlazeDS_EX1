@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EventMap 
     xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns="http://mate.asfusion.com/">
+    xmlns="http://mate.asfusion.com/"
+    >
     
     <mx:Script>
         <![CDATA[
-        
+            import mx.messaging.Producer;
+            import mx.events.FlexEvent;
+            
             import view.MainPanel;
             import manager.MainManager;
             import events.SimpleEvent;
+            import mx.messaging.events.MessageFaultEvent;
+            import mx.messaging.messages.AsyncMessage;
+            
+            private var chatProducer:Producer;
+            
+            private function onCreationComplete():void {
+                trace('MainEventMap.onCreationComplete');
+                chatProducer = new Producer();
+                chatProducer.destination = "chat";
+                chatProducer.addEventListener(MessageFaultEvent.FAULT, onFaultSendChatMessage);
+            }
+            
+            private function sendChatMessage(chatMessage:String):void {
+                trace('MainEventMap.sendChatMessage');
+                var asyncMessage:AsyncMessage = new AsyncMessage();
+                asyncMessage.body = chatMessage;
+                chatProducer.send(asyncMessage);
+            }
+            
+            private function onFaultSendChatMessage(faultEvent:MessageFaultEvent):void {
+                trace("onSendChatFault - Error: " + faultEvent.message.toString());
+            }
+            
+            private function onFaultReceiveChatMessage(object:Object):void {
+                trace("onFaultReceiveChatMessage: " + object);
+            }
             
         ]]>
     </mx:Script>
@@ -17,6 +46,12 @@
     <!-- remove during production. This tag can be placed here or in your main application -->
     
     <Debugger level="{Debugger.ALL}" />
+    
+    <EventHandlers type="{FlexEvent.CREATION_COMPLETE}" debug="true">
+         <InlineInvoker method="onCreationComplete"/>
+    </EventHandlers>
+    
+    <!-- GET SERVER TIME -->
     
     <EventHandlers type="{SimpleEvent.GET_SERVER_TIME}" debug="true">
         <RemoteObjectInvoker destination="timeService" method="getTime" debug="true">
@@ -27,11 +62,13 @@
             </resultHandlers>
             <faultHandlers>
                 <MethodInvoker generator="{MainManager}"
-                        method="onFaultServerTime"
-                        arguments="{resultObject}" />
+                               method="onFaultServerTime"
+                               arguments="{resultObject}" />
             </faultHandlers>
         </RemoteObjectInvoker>
     </EventHandlers>
+    
+    <!-- SAY HELLO -->
     
     <EventHandlers type="{SimpleEvent.SAY_HELLO}" debug="true">
         <RemoteObjectInvoker destination="helloWorldService" 
@@ -45,10 +82,16 @@
             </resultHandlers>
             <faultHandlers>
                 <MethodInvoker generator="{MainManager}"
-                        method="onFaultGreeting"
-                        arguments="{resultObject}" />
+                               method="onFaultGreeting"
+                               arguments="{resultObject}" />
             </faultHandlers>
         </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <!-- SEND CHAT MESSAGE -->
+    
+    <EventHandlers type="{SimpleEvent.SEND_CHAT_MESSAGE}" debug="true">
+        <InlineInvoker method="sendChatMessage" arguments="{event.chatMessage}"/>
     </EventHandlers>
     
     <EventHandlers type="{SimpleEvent.GET_RANDOM_NUMBERS}" debug="true">
@@ -69,20 +112,16 @@
         </RemoteObjectInvoker>
     </EventHandlers>
     
+    <!-- RECEIVE CHAT MESSAGE -->
+    
     <MessageHandlers destination="chat" debug="true">
-        <MethodInvoker generator="{MainManager}" 
-                       method="handleChatMessage"
-                       arguments="{message}" />
-                       
         <EventAnnouncer generator="{SimpleEvent}"
                         type="{SimpleEvent.CHAT_MESSAGE_RECEIVED}">
-            <Properties chatMessage="{message.body.chatMessage }" />
+            <Properties chatMessage="{message.body}" />
         </EventAnnouncer>
 
         <faultHandlers>
-            <MethodInvoker generator="{MainManager}" 
-                           method="onFaultChatMessage"
-                           arguments="{message}"/>
+            <InlineInvoker method="onFaultReceiveChatMessage" arguments="{message}"/>
         </faultHandlers>
 
     </MessageHandlers>

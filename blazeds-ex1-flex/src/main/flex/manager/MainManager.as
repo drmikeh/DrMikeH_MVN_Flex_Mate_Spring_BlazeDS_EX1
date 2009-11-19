@@ -47,17 +47,6 @@ package manager
         // --------------------------------------------
         public function onFaultRandomNumbers(obj:Object):void {
             trace("onFaultRandomNumbers: " + obj);
-        }
-        
-        // --------------------------------------------
-        public function handleChatMessage(obj:Object):void {
-            trace("handleChatMessage: " + obj);
-        }
-        
-        // --------------------------------------------
-        public function onFaultChatMessage(obj:Object):void {
-            trace("onFaultChatMessage: " + obj);
-        }
-        
+        }  
     }
 }

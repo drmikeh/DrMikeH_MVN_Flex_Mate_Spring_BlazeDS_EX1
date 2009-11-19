@@ -50,6 +50,7 @@
                         <swf>${build.finalName}</swf>
                         <width>100%</width>
                         <height>100%</height>
+                        <bgcolor>red</bgcolor>
                     </parameters>
                 </configuration>
                 
