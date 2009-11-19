@@ -1,5 +1,8 @@
 target
+bin-debug
 MANIFEST.MF
 .classpath
 .project
 .settings
+.actionScriptProperties
+.flexProperties

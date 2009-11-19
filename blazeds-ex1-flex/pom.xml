@@ -41,6 +41,7 @@
                     <contextRoot>blazeds-ex1-web</contextRoot>
                     <templateURI>folder:${basedir}/html-template</templateURI>
                     <htmlName>index</htmlName>
+                    <debug>true</debug>
                     <!-- targetPlayer>10.0.0</targetPlayer -->
                     <locales>
                         <locale>en_US</locale>

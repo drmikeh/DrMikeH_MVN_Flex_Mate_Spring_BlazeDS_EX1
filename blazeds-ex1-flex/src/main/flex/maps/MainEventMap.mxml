@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap 
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns="http://mate.asfusion.com/">
+    
+    <mx:Script>
+        <![CDATA[
+        
+            import view.MainPanel;
+            import manager.MainManager;
+            import events.SimpleEvent;
+            
+        ]]>
+    </mx:Script>
+    
+    <!-- Debugger __________________________________________________________________ -->
+    <!-- remove during production. This tag can be placed here or in your main application -->
+    
+    <Debugger level="{Debugger.ALL}" />
+    
+    <EventHandlers type="{SimpleEvent.GET_SERVER_TIME}" debug="true">
+        <RemoteObjectInvoker destination="timeService" method="getTime" debug="true">
+            <resultHandlers>
+                <MethodInvoker generator="{MainManager}" 
+                               method="setServerTime"
+                               arguments="{resultObject}"/>
+            </resultHandlers>
+            <faultHandlers>
+                <MethodInvoker generator="{MainManager}"
+                        method="onFaultServerTime"
+                        arguments="{resultObject}" />
+            </faultHandlers>
+        </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <EventHandlers type="{SimpleEvent.SAY_HELLO}" debug="true">
+        <RemoteObjectInvoker destination="helloWorldService" 
+                             method="say"
+                             arguments="{event.who}"
+                             debug="true">
+            <resultHandlers>
+                <MethodInvoker generator="{MainManager}" 
+                               method="setGreeting"
+                               arguments="{resultObject}"/>
+            </resultHandlers>
+            <faultHandlers>
+                <MethodInvoker generator="{MainManager}"
+                        method="onFaultGreeting"
+                        arguments="{resultObject}" />
+            </faultHandlers>
+        </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <EventHandlers type="{SimpleEvent.GET_RANDOM_NUMBERS}" debug="true">
+        <RemoteObjectInvoker destination="randomNumberService" 
+                             method="getNumbers"
+                             arguments="{event.quantity}"
+                             debug="true">
+            <resultHandlers>
+                <MethodInvoker generator="{MainManager}" 
+                               method="setRandomNumbers"
+                               arguments="{resultObject}"/>
+            </resultHandlers>
+            <faultHandlers>
+                <MethodInvoker generator="{MainManager}"
+                        method="onFaultRandomNumbers"
+                        arguments="{resultObject}" />
+            </faultHandlers>
+        </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <!-- Injectors __________________________________________________________________ -->
+    
+    <Injectors target="{MainPanel}">
+        <PropertyInjector targetKey="serverTime" source="{MainManager}" sourceKey="serverTime" />
+        <PropertyInjector targetKey="greeting" source="{MainManager}" sourceKey="greeting" />
+        <PropertyInjector targetKey="randomNumbers" source="{MainManager}" sourceKey="randomNumbers" />
+    </Injectors>
+    
+</EventMap>
