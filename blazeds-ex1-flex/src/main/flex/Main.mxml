@@ -55,13 +55,13 @@
         
 	<mx:Script>
         <![CDATA[
-          import mx.messaging.events.MessageEvent;
-          import mx.messaging.messages.AsyncMessage;
-          import mx.binding.utils.BindingUtils;
-          import mx.messaging.channels.StreamingAMFChannel;
-          import mx.rpc.events.ResultEvent;
-          import mx.controls.Alert;
-          import mx.collections.ArrayCollection;
+            import mx.messaging.events.MessageEvent;
+            import mx.messaging.messages.AsyncMessage;
+            import mx.binding.utils.BindingUtils;
+            import mx.messaging.channels.StreamingAMFChannel;
+            import mx.rpc.events.ResultEvent;
+            import mx.controls.Alert;
+            import mx.collections.ArrayCollection;
             
             [Bindable]
             private var greeting : String;

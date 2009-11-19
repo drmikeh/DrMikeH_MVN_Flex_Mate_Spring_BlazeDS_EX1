@@ -119,12 +119,30 @@
 			<version>${flex.sdk.version}</version>
 			<type>pom</type>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.adobe.flex.framework</groupId>
 			<artifactId>flex-framework</artifactId>
 			<version>${flex.sdk.version}</version>
 			<type>pom</type>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.asfusion.mate</groupId>
+            <artifactId>mate</artifactId>
+            <version>0.8.9</version>
+            <type>swc</type>
+        </dependency>
+        
+        <!-- flexmojos Unit testing support -->
+        <dependency>
+          <groupId>org.sonatype.flexmojos</groupId>
+          <artifactId>flexmojos-unittest-support</artifactId>
+          <version>3.3.0</version>
+          <type>swc</type>
+          <scope>test</scope>
+        </dependency>
+		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>blazeds-ex1-flex-config</artifactId>

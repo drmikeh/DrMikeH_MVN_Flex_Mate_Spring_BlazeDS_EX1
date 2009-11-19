@@ -1,2 +1,5 @@
 target
 MANIFEST.MF
+.classpath
+.project
+.settings
