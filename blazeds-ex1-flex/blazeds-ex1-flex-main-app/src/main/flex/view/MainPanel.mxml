@@ -35,7 +35,29 @@
                 </mx:Tile>
             </mx:VBox>
             
-            <mx:VBox label="Flex Modules" horizontalAlign="center">
+            <mx:VBox label="Module 1" horizontalAlign="center">
+                <mx:VBox>
+                    <mx:HBox>
+                        <mx:Button id="loadModule1Button"   label="Load Module 1"   click="loadModule1()"/>
+                        <mx:Button id="unloadModule1Button" label="Unload Module 1" click="unloadModule1()"/>
+                    </mx:HBox>
+                    
+                    <mx:Tile id="module1tile" direction="horizontal" borderStyle="inset" 
+                             horizontalGap="10" verticalGap="15" 
+                             paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
+                </mx:VBox>
+            </mx:VBox>
+            
+            <mx:VBox label="Module 2" horizontalAlign="center">
+                <mx:VBox>
+                    <mx:ControlBar>
+                        <mx:Button id="loadModule2Button"   label="Load Module 2"   click="loadModule2()"/>
+                        <mx:Button id="unloadModule2Button" label="Unload Module 2" click="unloadModule2()"/> 
+                    </mx:ControlBar>
+                    <mx:Tile id="module2tile" direction="horizontal" borderStyle="inset" 
+                             horizontalGap="10" verticalGap="15" 
+                             paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
+                </mx:VBox>
             </mx:VBox>
             
         </mx:TabNavigator>
@@ -50,6 +72,8 @@
             import mx.rpc.events.ResultEvent;
             import mx.controls.Alert;
             import mx.collections.ArrayCollection;
+            import mx.modules.ModuleLoader;
+            
             import events.SimpleEvent;
             
             [Bindable]
@@ -108,6 +132,42 @@
             public function chatMessageHandler(event:SimpleEvent):void {
                 trace("chatMessageHandler: " + event);
                 chatLog.text += event.chatMessage + "\n";
+            }
+            
+            // -------------------------------------------------
+            // load module 1
+            private function loadModule1():void {
+                var moduleLoader : ModuleLoader = new ModuleLoader();
+                moduleLoader.url = "blazeds-ex1-flex-module1-1.0-SNAPSHOT.swf";
+                module1tile.addChild( moduleLoader );
+            }
+            
+            // -------------------------------------------------
+            // unload module 1
+            private function unloadModule1():void {
+                if (module1tile.numChildren > 0) {
+                    var displayObject : DisplayObject = module1tile.getChildAt(module1tile.numChildren - 1);
+                    ModuleLoader( displayObject ).unloadModule();
+                    module1tile.removeChild( displayObject );
+                }
+            }
+            
+            // -------------------------------------------------
+            // load module 2
+            private function loadModule2():void {
+                var moduleLoader : ModuleLoader = new ModuleLoader();
+                moduleLoader.url = "blazeds-ex1-flex-module2-1.0-SNAPSHOT.swf";
+                module2tile.addChild( moduleLoader );
+            }
+            
+            // -------------------------------------------------
+            // unload module 2
+            private function unloadModule2():void {
+                if (module2tile.numChildren > 0) {
+                    var displayObject : DisplayObject = module2tile.getChildAt(module2tile.numChildren - 1);
+                    ModuleLoader( displayObject ).unloadModule();
+                    module2tile.removeChild( displayObject );
+                }
             }
             
         ]]>
