@@ -1,0 +1,3 @@
+Put Mate stuff into Module 2.
+Add Mock Objects for Remoting.
+Get rebuilding working in Eclipse using Tomcat as target build folder.

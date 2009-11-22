@@ -1,0 +1,5 @@
+Import as Maven projects, then fix Flex projects:
+  *add flex nature
+  *define src folder as src/main/flex
+  *add inter-project dependencies
+  *add Module paths to Main Flex App
