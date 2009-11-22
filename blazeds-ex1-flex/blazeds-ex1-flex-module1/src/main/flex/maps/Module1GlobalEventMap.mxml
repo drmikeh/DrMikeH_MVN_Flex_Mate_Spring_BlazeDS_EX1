@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap xmlns:mx="http://www.adobe.com/2006/mxml"
+          xmlns="http://mate.asfusion.com/">
+    
+    <!-- GET SERVER TIME -->
+    
+    <EventHandlers type="{SimpleEvent.GET_SERVER_TIME}" debug="true">
+        <RemoteObjectInvoker destination="timeService" method="getTime" debug="true">
+            <resultHandlers>
+                <MethodInvoker generator="{MainManager}" 
+                               method="setServerTime"
+                               arguments="{resultObject}"/>
+            </resultHandlers>
+            <faultHandlers>
+                <MethodInvoker generator="{MainManager}"
+                               method="onFaultServerTime"
+                               arguments="{resultObject}" />
+            </faultHandlers>
+        </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <!-- Injectors __________________________________________________________________ -->
+    
+    <Injectors target="{Module1Panel}">
+        <PropertyInjector targetKey="serverTime" source="{MainManager}" sourceKey="serverTime" />
+    </Injectors>
+    
+    <mx:Script>
+        <![CDATA[
+            
+            import manager.MainManager;
+            import events.SimpleEvent;
+            import view.Module1Panel;
+            
+        ]]>
+    </mx:Script>
+    
+</EventMap>

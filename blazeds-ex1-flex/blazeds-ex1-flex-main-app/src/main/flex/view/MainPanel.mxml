@@ -4,64 +4,60 @@
     creationComplete="onCreationComplete()"
     >
     
-    <mx:VBox horizontalAlign="center" verticalAlign="top" width="70%" height="70%">
-        <mx:TabNavigator width="100%" height="100%" >
-           <mx:VBox label="Basic BlazeDS Services" horizontalAlign="center">
-                <mx:Tile direction="horizontal" borderStyle="none" horizontalAlign="center"
-                         horizontalGap="10" verticalGap="15" 
-                         paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+    <mx:TabNavigator width="100%" height="100%" >
+       <mx:VBox label="Basic BlazeDS Services" horizontalAlign="center">
+            <mx:Tile direction="horizontal" borderStyle="none" horizontalAlign="center"
+                     horizontalGap="10" verticalGap="15" 
+                     paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+                     
+                <mx:VBox horizontalAlign="center">
+                    <mx:Text id="serverTimeText" text="{serverTime}" />
+                </mx:VBox>
+                <mx:VBox label="Hello Service" horizontalAlign="center">
+                    <mx:Label text="Enter your name:" /> 
+                    <mx:TextInput id="who" /> 
+                    <mx:Button label="Say" click="sayHello()" />
+                    <mx:Text id="greetingText" text="{greeting}" />
+                </mx:VBox>
+                <mx:VBox label="Random Number Service" horizontalAlign="center">
+                    <mx:Button label="Get Random Numbers" click="getRandomNumbers()" />
+                    <mx:TextArea id="randomNumbersList" text="{randomNumbers}" />
+                </mx:VBox>
+                <mx:VBox label="Chat Service">
+                    <mx:TextArea id="chatLog" width="300" height="100" />
+                    <mx:ControlBar left="10">
+                        <mx:TextInput id="msg" width="200" enter="sendChatMessage()"/>
+                        <mx:Button label="Send" click="sendChatMessage()"/>
+                   </mx:ControlBar>
+                </mx:VBox>
+            </mx:Tile>
+        </mx:VBox>
+            
+        <mx:VBox label="Module 1" horizontalAlign="center">
+            <mx:VBox>
+                <mx:HBox>
+                    <mx:Button id="loadModule1Button"   label="Load Module 1"   click="loadModule1()"/>
+                    <mx:Button id="unloadModule1Button" label="Unload Module 1" click="unloadModule1()"/>
+                </mx:HBox>
                 
-                    <mx:VBox label="Hello Service" horizontalAlign="center">
-                        <mx:Label text="Enter your name:" /> 
-                        <mx:TextInput id="who" /> 
-                        <mx:Button label="Say" click="sayHello()" />
-                        <mx:Text id="greetingText" text="{greeting}" />
-                    </mx:VBox>
-                    <mx:VBox label="Time Service" horizontalAlign="center">
-                        <mx:Button label="Get Server Time" click="getServerTime()" />
-                        <mx:Text id="serverTimeText" text="{serverTime}" />
-                    </mx:VBox>
-                    <mx:VBox label="Random Number Service" horizontalAlign="center">
-                        <mx:Button label="Get Random Numbers" click="getRandomNumbers()" />
-                        <mx:TextArea id="randomNumbersList" text="{randomNumbers}" />
-                    </mx:VBox>
-                    <mx:VBox label="Chat Service">
-                        <mx:TextArea id="chatLog" width="300" height="100" />
-                        <mx:ControlBar left="10">
-                            <mx:TextInput id="msg" width="200" enter="sendChatMessage()"/>
-                            <mx:Button label="Send" click="sendChatMessage()"/>
-                       </mx:ControlBar>
-                    </mx:VBox>
-                </mx:Tile>
+                <mx:Tile id="module1tile" direction="horizontal" borderStyle="inset" 
+                         horizontalGap="10" verticalGap="15" 
+                         paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
             </mx:VBox>
-            
-            <mx:VBox label="Module 1" horizontalAlign="center">
-                <mx:VBox>
-                    <mx:HBox>
-                        <mx:Button id="loadModule1Button"   label="Load Module 1"   click="loadModule1()"/>
-                        <mx:Button id="unloadModule1Button" label="Unload Module 1" click="unloadModule1()"/>
-                    </mx:HBox>
-                    
-                    <mx:Tile id="module1tile" direction="horizontal" borderStyle="inset" 
-                             horizontalGap="10" verticalGap="15" 
-                             paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
-                </mx:VBox>
+        </mx:VBox>
+        
+        <mx:VBox label="Module 2" horizontalAlign="center">
+            <mx:VBox>
+                <mx:ControlBar>
+                    <mx:Button id="loadModule2Button"   label="Load Module 2"   click="loadModule2()"/>
+                    <mx:Button id="unloadModule2Button" label="Unload Module 2" click="unloadModule2()"/> 
+                </mx:ControlBar>
+                <mx:Tile id="module2tile" direction="horizontal" borderStyle="inset" 
+                         horizontalGap="10" verticalGap="15" 
+                         paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
             </mx:VBox>
-            
-            <mx:VBox label="Module 2" horizontalAlign="center">
-                <mx:VBox>
-                    <mx:ControlBar>
-                        <mx:Button id="loadModule2Button"   label="Load Module 2"   click="loadModule2()"/>
-                        <mx:Button id="unloadModule2Button" label="Unload Module 2" click="unloadModule2()"/> 
-                    </mx:ControlBar>
-                    <mx:Tile id="module2tile" direction="horizontal" borderStyle="inset" 
-                             horizontalGap="10" verticalGap="15" 
-                             paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
-                </mx:VBox>
-            </mx:VBox>
-            
-        </mx:TabNavigator>
-  </mx:VBox>
+        </mx:VBox>
+    </mx:TabNavigator>
   
   <mx:Script>
         <![CDATA[
@@ -87,14 +83,6 @@
            
             private function onCreationComplete():void {
                 trace("onCreationComplete");
-            }
-            
-            // -------------------------------------------------
-            // perform the action - dispatch an event
-            private function getServerTime() : void {
-                trace("getServerTime");
-                var event:SimpleEvent = new SimpleEvent(SimpleEvent.GET_SERVER_TIME);
-                dispatchEvent(event);
             }
             
             // -------------------------------------------------

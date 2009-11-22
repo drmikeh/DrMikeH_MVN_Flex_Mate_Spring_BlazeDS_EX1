@@ -123,5 +123,13 @@
 			<type>zip</type>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.kaizencreek.blazeds-ex1</groupId>
+    	    <artifactId>blazeds-ex1-flex-common</artifactId>
+    	    <version>1.0-SNAPSHOT</version>
+    	    <type>swc</type>
+    	</dependency>
+        
 	</dependencies>
 </project>

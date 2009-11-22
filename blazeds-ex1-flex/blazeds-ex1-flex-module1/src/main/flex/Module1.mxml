@@ -1,9 +1,13 @@
  <mx:Module xmlns:mx="http://www.adobe.com/2006/mxml"
-       width="100%" height="100%">
-
-    <mx:Panel width="200" height="100">
-        <mx:Label text="Module 1" />
-    </mx:Panel>
+       width="100%" height="100%" 
+       xmlns:maps="maps.*"
+       xmlns:view="view.*">
+       
+    <maps:Module1GlobalEventMap/>
+    
+    <maps:Module1LocalEventMap/>
+    
+    <view:Module1Panel/>
     
  </mx:Module>
 

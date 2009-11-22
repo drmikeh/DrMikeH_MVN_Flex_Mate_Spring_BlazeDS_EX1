@@ -4,11 +4,11 @@ package events
     
     public class SimpleEvent extends Event
     {
-        public static const GET_SERVER_TIME : String = "getServerTime";
-        public static const SAY_HELLO : String = "sayHello";
-        public static const GET_RANDOM_NUMBERS : String = "getRandomNumbers";
+        public static const GET_SERVER_TIME       : String = "getServerTime";
+        public static const SAY_HELLO             : String = "sayHello";
+        public static const GET_RANDOM_NUMBERS    : String = "getRandomNumbers";
         public static const CHAT_MESSAGE_RECEIVED : String = "chatMessageReceived";
-        public static const SEND_CHAT_MESSAGE : String = "sendChatMessage";
+        public static const SEND_CHAT_MESSAGE     : String = "sendChatMessage";
         
         public var who : String;
         public var quantity : int;

@@ -12,9 +12,9 @@
 	</parent>
 	
 	<groupId>com.kaizencreek.blazeds-ex1</groupId>
-	<artifactId>blazeds-ex1-flex-module1</artifactId>
-	<packaging>swf</packaging>
-	<name>[blazeds-ex1] Flex Module 1</name>
+	<artifactId>blazeds-ex1-flex-common</artifactId>
+	<packaging>swc</packaging>
+	<name>[blazeds-ex1] Flex Common SWC</name>
 	<version>1.0-SNAPSHOT</version>
 	
 	<build>
@@ -33,29 +33,34 @@
 		
 		<plugins>
 		    <plugin>
-                        <groupId>org.sonatype.flexmojos</groupId>
-                        <artifactId>flexmojos-maven-plugin</artifactId>
-                        <version>${flexmojos.version}</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <contextRoot>blazeds-ex1-web</contextRoot>
-                            <debug>true</debug>
-                            <locales>
-                                <locale>en_US</locale>
-                            </locales>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.adobe.flex</groupId>
-                                <artifactId>compiler</artifactId>
-                                <version>${flex.sdk.version}</version>
-                                <type>pom</type>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+                
+                <configuration>
+                    <contextRoot>blazeds-ex1-web</contextRoot>
+                    <templateURI>folder:${basedir}/html-template</templateURI>
+                    <htmlName>index</htmlName>
+                    <debug>true</debug>
+                    <!-- targetPlayer>10.0.0</targetPlayer -->
+                    <locales>
+                        <locale>en_US</locale>
+                    </locales>
+                </configuration>
+                
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.sdk.version}</version>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
             
-		    <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
@@ -85,12 +90,5 @@
 			<type>zip</type>
 			<scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-            <groupId>com.kaizencreek.blazeds-ex1</groupId>
-    	    <artifactId>blazeds-ex1-flex-common</artifactId>
-    	    <version>1.0-SNAPSHOT</version>
-    	    <type>swc</type>
-    	</dependency>
 	</dependencies>
 </project>

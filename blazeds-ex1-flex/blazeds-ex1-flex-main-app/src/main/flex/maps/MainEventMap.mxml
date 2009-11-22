@@ -53,23 +53,6 @@
          <InlineInvoker method="onCreationComplete"/>
     </EventHandlers>
     
-    <!-- GET SERVER TIME -->
-    
-    <EventHandlers type="{SimpleEvent.GET_SERVER_TIME}" debug="true">
-        <RemoteObjectInvoker destination="timeService" method="getTime" debug="true">
-            <resultHandlers>
-                <MethodInvoker generator="{MainManager}" 
-                               method="setServerTime"
-                               arguments="{resultObject}"/>
-            </resultHandlers>
-            <faultHandlers>
-                <MethodInvoker generator="{MainManager}"
-                               method="onFaultServerTime"
-                               arguments="{resultObject}" />
-            </faultHandlers>
-        </RemoteObjectInvoker>
-    </EventHandlers>
-    
     <!-- SAY HELLO -->
     
     <EventHandlers type="{SimpleEvent.SAY_HELLO}" debug="true">
