@@ -106,7 +106,7 @@
 	    </plugins>
 	</reporting>
   <modules>
-    <module>../blazeds-ex1-flex</module>
+    <module>../blazeds-ex1-flex/blazeds-ex1-flex-parent</module>
     <module>../blazeds-ex1-web</module>
     <module>../blazeds-ex1-remoting-config</module>
   </modules>
