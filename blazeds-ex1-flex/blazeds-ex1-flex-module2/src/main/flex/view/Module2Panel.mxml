@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" horizontalAlign="center">
+    
+    <mx:VBox label="Random Number Service" horizontalAlign="center">
+        <mx:Button label="Get Random Numbers" click="getRandomNumbers()" />
+        <mx:TextArea id="randomNumbersList" text="{randomNumbers}" />
+    </mx:VBox>
+                
+    <mx:Script>
+        <![CDATA[
+        
+            import mx.collections.ArrayCollection;
+            import events.SimpleEvent; 
+            
+            [Bindable]
+            public var randomNumbers : ArrayCollection;
+            
+            // -------------------------------------------------
+            // perform the action - dispatch an event
+            private function getRandomNumbers() : void {
+                trace("getRandomNumbers");
+                var event:SimpleEvent = new SimpleEvent(SimpleEvent.GET_RANDOM_NUMBERS);
+                event.quantity = 5;
+                dispatchEvent(event);
+            }
+            
+        ]]>
+    </mx:Script>
+</mx:Panel>

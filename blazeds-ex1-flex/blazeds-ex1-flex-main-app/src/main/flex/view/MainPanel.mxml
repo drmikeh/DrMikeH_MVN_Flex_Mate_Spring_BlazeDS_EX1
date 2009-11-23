@@ -4,70 +4,82 @@
     creationComplete="onCreationComplete()"
     >
     
-    <mx:TabNavigator width="100%" height="100%" >
-       <mx:VBox label="Basic BlazeDS Services" horizontalAlign="center">
-            <mx:Tile direction="horizontal" borderStyle="none" horizontalAlign="center"
-                     horizontalGap="10" verticalGap="15" 
-                     paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
-                     
-                <mx:VBox horizontalAlign="center">
-                    <mx:Text id="serverTimeText" text="{serverTime}" />
-                </mx:VBox>
-                <mx:VBox label="Hello Service" horizontalAlign="center">
-                    <mx:Label text="Enter your name:" /> 
-                    <mx:TextInput id="who" /> 
-                    <mx:Button label="Say" click="sayHello()" />
-                    <mx:Text id="greetingText" text="{greeting}" />
-                </mx:VBox>
-                <mx:VBox label="Random Number Service" horizontalAlign="center">
-                    <mx:Button label="Get Random Numbers" click="getRandomNumbers()" />
-                    <mx:TextArea id="randomNumbersList" text="{randomNumbers}" />
-                </mx:VBox>
-                <mx:VBox label="Chat Service">
-                    <mx:TextArea id="chatLog" width="300" height="100" />
-                    <mx:ControlBar left="10">
-                        <mx:TextInput id="msg" width="200" enter="sendChatMessage()"/>
-                        <mx:Button label="Send" click="sendChatMessage()"/>
-                   </mx:ControlBar>
-                </mx:VBox>
-            </mx:Tile>
-        </mx:VBox>
+    <mx:HBox width="100%" height="100%" 
+             label="Flex with Mate and Modules and BlazeDS (built with Maven)" 
+             backgroundColor="#888888"
+             horizontalAlign="center" verticalAlign="middle"
+             paddingLeft="20">
+             
+        <mx:Box direction="vertical" 
+                width="400" height="500"
+                paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10"
+                backgroundColor="#AAAAFF">
+
+            <mx:HBox label="Data from Module 1" horizontalAlign="center">
+                <mx:Label text="Server Time: "/>
+                <mx:Text id="serverTimeText" text="{serverTime}" />
+            </mx:HBox>
             
-        <mx:VBox label="Module 1" horizontalAlign="center">
-            <mx:VBox>
-                <mx:HBox>
-                    <mx:Button id="loadModule1Button"   label="Load Module 1"   click="loadModule1()"/>
-                    <mx:Button id="unloadModule1Button" label="Unload Module 1" click="unloadModule1()"/>
-                </mx:HBox>
-                
-                <mx:Tile id="module1tile" direction="horizontal" borderStyle="inset" 
-                         horizontalGap="10" verticalGap="15" 
-                         paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
-            </mx:VBox>
-        </mx:VBox>
-        
-        <mx:VBox label="Module 2" horizontalAlign="center">
-            <mx:VBox>
-                <mx:ControlBar>
-                    <mx:Button id="loadModule2Button"   label="Load Module 2"   click="loadModule2()"/>
-                    <mx:Button id="unloadModule2Button" label="Unload Module 2" click="unloadModule2()"/> 
+            <mx:Box label="Hello Service" direction="vertical">
+                <mx:Label text="Enter your name:" /> 
+                <mx:TextInput id="who" /> 
+                <mx:Button label="Say" click="sayHello()" />
+                <mx:Text id="greetingText" text="{greeting}" />
+            </mx:Box>
+            
+            <mx:Box label="Chat Service" direction="vertical">
+                <mx:TextArea id="chatLog" width="300" height="100" />
+                <mx:ControlBar left="10">
+                    <mx:TextInput id="msg" width="200" enter="sendChatMessage()"/>
+                    <mx:Button label="Send" click="sendChatMessage()"/>
                 </mx:ControlBar>
-                <mx:Tile id="module2tile" direction="horizontal" borderStyle="inset" 
-                         horizontalGap="10" verticalGap="15" 
-                         paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
-            </mx:VBox>
-        </mx:VBox>
-    </mx:TabNavigator>
+            </mx:Box>
+            
+            <mx:Box label="Data From Module 2" direction="horizontal">
+                <mx:Label text="Random Numbers:" />
+                <mx:Text id="randomNumbersList" text="{randomNumbers}" width="200" />
+            </mx:Box>                
+                
+        </mx:Box>
+        
+        <mx:Box label="Module 1"
+                width="400" height="500" 
+                horizontalAlign="center" direction="vertical"
+                paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10"
+                backgroundColor="#AAFFAA">
+                
+            <mx:Button id="loadModule1Button"   label="Load Module 1"   click="loadModule1()"/>
+            <mx:Panel id="module1tile" borderStyle="inset"
+                     horizontalAlign="center"
+                     horizontalGap="10" verticalGap="15"
+                     width="300" height="200"
+                     paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
+        </mx:Box>
+        
+        <mx:Box label="Module 2"
+                width="400" height="500" 
+                horizontalAlign="center" direction="vertical"
+                paddingLeft="10" paddingRight="10" paddingTop="10" paddingBottom="10"
+                backgroundColor="#FFFFAA">
+            
+            <mx:Button id="loadModule2Button" label="Load Module 2"   click="loadModule2()"/>
+            <mx:Panel id="module2tile" borderStyle="inset"
+                     horizontalAlign="center"
+                     horizontalGap="10" verticalGap="15"
+                     width="300" height="200"
+                     paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10"/>
+        </mx:Box>
+    </mx:HBox>
   
   <mx:Script>
         <![CDATA[
+            import mx.collections.ArrayCollection;
             import mx.messaging.events.MessageEvent;
             import mx.messaging.messages.AsyncMessage;
             import mx.binding.utils.BindingUtils;
             import mx.messaging.channels.StreamingAMFChannel;
             import mx.rpc.events.ResultEvent;
             import mx.controls.Alert;
-            import mx.collections.ArrayCollection;
             import mx.modules.ModuleLoader;
             
             import events.SimpleEvent;
@@ -80,7 +92,11 @@
             
             [Bindable]
             public var randomNumbers : ArrayCollection;
-           
+            
+            private var module1Loaded : Boolean = false;
+            
+            private var module2Loaded : Boolean = false;
+            
             private function onCreationComplete():void {
                 trace("onCreationComplete");
             }
@@ -91,15 +107,6 @@
                 trace("sayHello");
                 var event:SimpleEvent = new SimpleEvent(SimpleEvent.SAY_HELLO);
                 event.who = who.text;
-                dispatchEvent(event);
-            }
-            
-            // -------------------------------------------------
-            // perform the action - dispatch an event
-            private function getRandomNumbers() : void {
-                trace("getRandomNumbers");
-                var event:SimpleEvent = new SimpleEvent(SimpleEvent.GET_RANDOM_NUMBERS);
-                event.quantity = 5;
                 dispatchEvent(event);
             }
             
@@ -123,38 +130,42 @@
             }
             
             // -------------------------------------------------
-            // load module 1
+            // load or unload module 1
             private function loadModule1():void {
-                var moduleLoader : ModuleLoader = new ModuleLoader();
-                moduleLoader.url = "blazeds-ex1-flex-module1-1.0-SNAPSHOT.swf";
-                module1tile.addChild( moduleLoader );
-            }
-            
-            // -------------------------------------------------
-            // unload module 1
-            private function unloadModule1():void {
-                if (module1tile.numChildren > 0) {
+                
+                if (module1Loaded == false) {
+                    var moduleLoader : ModuleLoader = new ModuleLoader();
+                    moduleLoader.url = "blazeds-ex1-flex-module1-1.0-SNAPSHOT.swf";
+                    module1tile.addChild( moduleLoader );
+                    module1Loaded = true;
+                    loadModule1Button.label = "Unload Module 1";
+                }
+                else {
                     var displayObject : DisplayObject = module1tile.getChildAt(module1tile.numChildren - 1);
                     ModuleLoader( displayObject ).unloadModule();
                     module1tile.removeChild( displayObject );
+                    module1Loaded = false;
+                    loadModule1Button.label = "Load Module 1";                    
                 }
             }
             
             // -------------------------------------------------
-            // load module 2
+            // load or unload module 2
             private function loadModule2():void {
-                var moduleLoader : ModuleLoader = new ModuleLoader();
-                moduleLoader.url = "blazeds-ex1-flex-module2-1.0-SNAPSHOT.swf";
-                module2tile.addChild( moduleLoader );
-            }
-            
-            // -------------------------------------------------
-            // unload module 2
-            private function unloadModule2():void {
-                if (module2tile.numChildren > 0) {
+                
+                if (module2Loaded == false) {
+                    var moduleLoader : ModuleLoader = new ModuleLoader();
+                    moduleLoader.url = "blazeds-ex1-flex-module2-1.0-SNAPSHOT.swf";
+                    module2tile.addChild( moduleLoader );
+                    module2Loaded = true;
+                    loadModule2Button.label = "Unload Module 2";
+                }
+                else {
                     var displayObject : DisplayObject = module2tile.getChildAt(module2tile.numChildren - 1);
                     ModuleLoader( displayObject ).unloadModule();
                     module2tile.removeChild( displayObject );
+                    module2Loaded = false;
+                    loadModule2Button.label = "Load Module 2";
                 }
             }
             

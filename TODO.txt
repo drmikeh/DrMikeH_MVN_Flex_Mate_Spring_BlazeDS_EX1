@@ -1,3 +1,4 @@
-Put Mate stuff into Module 2.
-Add Mock Objects for Remoting.
-Get rebuilding working in Eclipse using Tomcat as target build folder.
+x Put Mate stuff into Module 2.
+o Add Mock Objects for Remoting.
+o Add some Flex Unit Tests
+o Get rebuilding working in Eclipse using Tomcat as target build folder.

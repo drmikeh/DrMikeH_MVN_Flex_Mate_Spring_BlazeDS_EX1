@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap xmlns:mx="http://www.adobe.com/2006/mxml"
+          xmlns="http://mate.asfusion.com/">
+    
+    <!-- GET RANDOM NUMBERS -->
+    
+    <EventHandlers type="{SimpleEvent.GET_RANDOM_NUMBERS}" debug="true">
+        <RemoteObjectInvoker destination="randomNumberService" 
+                             method="getNumbers"
+                             arguments="{event.quantity}"
+                             debug="true">
+            <resultHandlers>
+                <MethodInvoker generator="{MainManager}" 
+                               method="setRandomNumbers"
+                               arguments="{resultObject}"/>
+            </resultHandlers>
+            <faultHandlers>
+                <MethodInvoker generator="{MainManager}"
+                               method="onFaultRandomNumbers"
+                               arguments="{resultObject}" />
+            </faultHandlers>
+        </RemoteObjectInvoker>
+    </EventHandlers>
+    
+    <!-- Injectors __________________________________________________________________ -->
+    
+    <Injectors target="{Module2Panel}">
+        <PropertyInjector targetKey="randomNumbers" source="{MainManager}" sourceKey="randomNumbers" />
+    </Injectors>
+    
+    <mx:Script>
+        <![CDATA[
+            
+            import manager.MainManager;
+            import events.SimpleEvent;
+            import view.Module2Panel;
+            
+        ]]>
+    </mx:Script>
+    
+</EventMap>

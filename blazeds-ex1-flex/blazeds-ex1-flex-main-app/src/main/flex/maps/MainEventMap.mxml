@@ -79,24 +79,6 @@
         <InlineInvoker method="sendChatMessage" arguments="{event.chatMessage}"/>
     </EventHandlers>
     
-    <EventHandlers type="{SimpleEvent.GET_RANDOM_NUMBERS}" debug="true">
-        <RemoteObjectInvoker destination="randomNumberService" 
-                             method="getNumbers"
-                             arguments="{event.quantity}"
-                             debug="true">
-            <resultHandlers>
-                <MethodInvoker generator="{MainManager}" 
-                               method="setRandomNumbers"
-                               arguments="{resultObject}"/>
-            </resultHandlers>
-            <faultHandlers>
-                <MethodInvoker generator="{MainManager}"
-                               method="onFaultRandomNumbers"
-                               arguments="{resultObject}" />
-            </faultHandlers>
-        </RemoteObjectInvoker>
-    </EventHandlers>
-    
     <!-- RECEIVE CHAT MESSAGE -->
     
     <MessageHandlers destination="chat" debug="true">
@@ -116,8 +98,8 @@
     
     <Injectors target="{MainPanel}">
         <PropertyInjector targetKey="serverTime" source="{MainManager}" sourceKey="serverTime" />
-        <PropertyInjector targetKey="greeting" source="{MainManager}" sourceKey="greeting" />
         <PropertyInjector targetKey="randomNumbers" source="{MainManager}" sourceKey="randomNumbers" />
+        <PropertyInjector targetKey="greeting" source="{MainManager}" sourceKey="greeting" />
         <ListenerInjector eventType="{SimpleEvent.CHAT_MESSAGE_RECEIVED}" method="chatMessageHandler" />
     </Injectors>
     
