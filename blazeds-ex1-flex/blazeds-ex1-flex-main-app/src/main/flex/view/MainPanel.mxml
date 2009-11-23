@@ -5,7 +5,7 @@
     >
     
     <mx:HBox width="100%" height="100%" 
-             label="Flex with Mate and Modules and BlazeDS (built with Maven)" 
+             label="Flex with Mate and Modules and BlazeDS (built with Maven)"
              backgroundColor="#888888"
              horizontalAlign="center" verticalAlign="middle"
              paddingLeft="20">
@@ -36,7 +36,7 @@
             </mx:Box>
             
             <mx:Box label="Data From Module 2" direction="horizontal">
-                <mx:Label text="Random Numbers:" />
+                <mx:Label text="Random Numbers (bug):" />
                 <mx:Text id="randomNumbersList" text="{randomNumbers}" width="200" />
             </mx:Box>                
                 

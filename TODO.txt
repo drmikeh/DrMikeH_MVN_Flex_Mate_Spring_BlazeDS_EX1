@@ -1,4 +1,6 @@
 x Put Mate stuff into Module 2.
 o Add Mock Objects for Remoting.
+o Move Mock objects outside of src/main/flex to src/mock/flex
+  so that FB will see them but Maven will ignore them.
 o Add some Flex Unit Tests
 o Get rebuilding working in Eclipse using Tomcat as target build folder.

@@ -1,0 +1,12 @@
+* Flex client
+  - Mate Framework
+  - Remoting with BlazeDS
+  - Mock objects for remoting
+  - Mock objects ignored by Maven packaging
+  - Common SWC, 2 Modules, and a Main SWF
+  - unit tests with flexmojos
+* Java server
+  - Spring Framework with BlazeDS integration
+  - unit tests with jUnit
+* Everything built with Maven
+* Runs in Jetty or Tomcat

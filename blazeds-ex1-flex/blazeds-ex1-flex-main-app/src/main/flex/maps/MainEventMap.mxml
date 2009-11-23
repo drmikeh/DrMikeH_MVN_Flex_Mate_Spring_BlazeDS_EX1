@@ -2,48 +2,14 @@
 <EventMap 
     xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns="http://mate.asfusion.com/"
-    >
+    xmlns:ms="services.*">
+    
+    <!-- Services _______________________________________________________ -->
+    
+    <ms:MockServices id="mainServices"/>
     
     <mx:Producer id="chatProducer" destination="chat" />
-    
-    <mx:Script>
-        <![CDATA[
-            import mx.messaging.Producer;
-            import mx.events.FlexEvent;
-            
-            import view.MainPanel;
-            import manager.MainManager;
-            import events.SimpleEvent;
-            import mx.messaging.events.MessageFaultEvent;
-            import mx.messaging.messages.AsyncMessage;
-            
-            // private var chatProducer:Producer;
-            
-            private function onCreationComplete():void {
-                trace('MainEventMap.onCreationComplete');
-                // chatProducer = new Producer();
-                // chatProducer.destination = "chat";
-                chatProducer.addEventListener(MessageFaultEvent.FAULT, onFaultSendChatMessage);
-            }
-            
-            private function sendChatMessage(chatMessage:String):void {
-                trace('MainEventMap.sendChatMessage');
-                var asyncMessage:AsyncMessage = new AsyncMessage();
-                asyncMessage.body = chatMessage;
-                chatProducer.send(asyncMessage);
-            }
-            
-            private function onFaultSendChatMessage(faultEvent:MessageFaultEvent):void {
-                trace("onSendChatFault - Error: " + faultEvent.message.toString());
-            }
-            
-            private function onFaultReceiveChatMessage(object:Object):void {
-                trace("onFaultReceiveChatMessage: " + object);
-            }
-            
-        ]]>
-    </mx:Script>
-    
+   
     <!-- Debugger __________________________________________________________________ -->
     <!-- remove during production. This tag can be placed here or in your main application -->
     
@@ -56,7 +22,7 @@
     <!-- SAY HELLO -->
     
     <EventHandlers type="{SimpleEvent.SAY_HELLO}" debug="true">
-        <RemoteObjectInvoker destination="helloWorldService" 
+        <RemoteObjectInvoker instance="{mainServices.helloWorldService}"
                              method="say"
                              arguments="{event.who}"
                              debug="true">
@@ -102,5 +68,45 @@
         <PropertyInjector targetKey="greeting" source="{MainManager}" sourceKey="greeting" />
         <ListenerInjector eventType="{SimpleEvent.CHAT_MESSAGE_RECEIVED}" method="chatMessageHandler" />
     </Injectors>
+    
+     <mx:Script>
+        <![CDATA[
+            import services.MainServices;
+            import mx.messaging.Producer;
+            import mx.events.FlexEvent;
+            
+            import view.MainPanel;
+            import manager.MainManager;
+            import events.SimpleEvent;
+            import services.MainServices;
+            
+            import mx.messaging.events.MessageFaultEvent;
+            import mx.messaging.messages.AsyncMessage;
+                        
+            private function onCreationComplete():void {
+                trace('MainEventMap.onCreationComplete');
+                // chatProducer = new Producer();
+                // chatProducer.destination = "chat";
+                chatProducer.addEventListener(MessageFaultEvent.FAULT, onFaultSendChatMessage);
+            }
+            
+            private function sendChatMessage(chatMessage:String):void {
+                trace('MainEventMap.sendChatMessage');
+                var asyncMessage:AsyncMessage = new AsyncMessage();
+                asyncMessage.body = chatMessage;
+                chatProducer.send(asyncMessage);
+            }
+            
+            private function onFaultSendChatMessage(faultEvent:MessageFaultEvent):void {
+                trace("onSendChatFault - Error: " + faultEvent.message.toString());
+            }
+            
+            private function onFaultReceiveChatMessage(object:Object):void {
+                trace("onFaultReceiveChatMessage: " + object);
+            }
+            
+        ]]>
+    </mx:Script>
+    
     
 </EventMap>

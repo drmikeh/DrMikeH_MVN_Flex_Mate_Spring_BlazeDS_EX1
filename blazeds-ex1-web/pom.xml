@@ -30,7 +30,7 @@
 	</properties>
 	
 	<build>
-		<finalName>blazeds-ex1</finalName>
+		<finalName>blazeds-ex1-web</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
