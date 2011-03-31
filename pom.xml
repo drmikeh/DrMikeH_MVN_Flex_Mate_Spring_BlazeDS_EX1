@@ -24,6 +24,15 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		
+		<repository>
+		    <id>mate-repository</id>
+		    <url>http://mate-framework.googlecode.com/svn/trunk/maven</url>
+		    <releases><enabled>true</enabled></releases>
+		    <snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		
+	<!--
 		<repository>
 			<id>codehaus-plugins</id>
 			<url>http://dist.codehaus.org/</url>
@@ -35,6 +44,8 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+	-->
+	
 	</repositories>
 	
 	<pluginRepositories>
@@ -96,8 +107,8 @@
 	    </plugins>
 	</reporting>
   <modules>
-    <module>../blazeds-ex1-flex/blazeds-ex1-flex-parent</module>
-    <module>../blazeds-ex1-web</module>
-    <module>../blazeds-ex1-remoting-config</module>
+    <module>blazeds-ex1-flex</module>
+    <module>blazeds-ex1-web</module>
+    <module>blazeds-ex1-remoting-config</module>
   </modules>
 </project>
